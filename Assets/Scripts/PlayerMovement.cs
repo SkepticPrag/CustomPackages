@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
         _moveAction.Enable();
 
         _pressAction.performed += MousePressed;
-        
+
         _pressAction.canceled += cancelDrag => { _isDragging = false; };
     }
 
