@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private InputAction _pressAction;
-    [SerializeField] private InputAction _moveAction;
+    [Range(0, 1)]
     [SerializeField] private float _dragSpeed = 0.1f;
+
+    [Space]
+
+    [SerializeField] private InputAction _pressAction;
 
     private Camera _mainCamera;
     private bool _isDragging = false;
@@ -17,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
         _mainCamera = Camera.main;
 
         _pressAction.Enable();
-        _moveAction.Enable();
 
         _pressAction.performed += MousePressed;
 
@@ -27,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         _pressAction.performed -= MousePressed;
-        _moveAction.Disable();
         _pressAction.Disable();
     }
 
@@ -36,17 +37,17 @@ public class PlayerMovement : MonoBehaviour
         if (context.action.WasPressedThisFrame())
         {
             _isDragging = true;
-            Vector2 initialPosition = _mainCamera.ScreenToWorldPoint(_moveAction.ReadValue<Vector2>());
-            StartCoroutine(DragShip(initialPosition));
+            Vector2 initialPosition = _mainCamera.ScreenToWorldPoint(context.ReadValue<Vector2>());
+            StartCoroutine(DragShip(initialPosition, context));
         }
     }
 
-    private IEnumerator DragShip(Vector2 initialPos)
+    private IEnumerator DragShip(Vector2 initialPos, InputAction.CallbackContext context)
     {
         Vector2 currentPosition = transform.position;
         while (_isDragging)
         {
-            Vector2 newPosition = _mainCamera.ScreenToWorldPoint(_moveAction.ReadValue<Vector2>());
+            Vector2 newPosition = _mainCamera.ScreenToWorldPoint(context.ReadValue<Vector2>());
             Vector2 finalPosition = newPosition - initialPos + currentPosition;
             transform.position = Vector2.SmoothDamp(transform.position, finalPosition, ref _velocity, _dragSpeed);
             yield return new WaitForFixedUpdate();
