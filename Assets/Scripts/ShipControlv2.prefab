@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c008e99a43734b747b576bb6bf35a0fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isUsingJoystick: 0
+  _isUsingJoystick: 1
   _isJoystickFixed: 0
 --- !u!1 &8699082990198267826
 GameObject:
@@ -475,9 +475,33 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Input
       m_Flags: 8
+    - m_Name: One Modifier
+      m_Id: 5f8440ef-ada5-4e92-adfa-282f10b7eb56
+      m_Path: OneModifier
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input
+      m_Flags: 4
+    - m_Name: modifier
+      m_Id: 7991f168-c887-439b-b47c-28abc9b8b3fd
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input
+      m_Flags: 8
+    - m_Name: binding
+      m_Id: 5bb9026d-7b08-44ea-ac64-cd439b863254
+      m_Path: <Mouse>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input
+      m_Flags: 8
     m_Flags: 0
-  _dragSpeed: 65
+  _dragSpeed: 2
   _isJoystickFixedInPlace: 0
-  _clampMagnitude: 5
+  _clampMagnitude: 0.5
   _outerCircle: {fileID: 6349352947839653135}
   _innerCircle: {fileID: 6607843192627588500}

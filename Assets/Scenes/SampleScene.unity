@@ -534,17 +534,53 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShipControlv2
       objectReference: {fileID: 0}
-    - target: {fileID: 3871890299216157687, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
-      propertyPath: _isUsingJoystick
-      value: 1
+    - target: {fileID: 6349352947839653120, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
+      propertyPath: _inputAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 5f8440ef-ada5-4e92-adfa-282f10b7eb56
       objectReference: {fileID: 0}
     - target: {fileID: 6349352947839653120, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
-      propertyPath: _dragSpeed
-      value: 2
+      propertyPath: _inputAction.m_SingletonActionBindings.Array.data[1].m_Id
+      value: 7991f168-c887-439b-b47c-28abc9b8b3fd
       objectReference: {fileID: 0}
     - target: {fileID: 6349352947839653120, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
-      propertyPath: _clampMagnitude
-      value: 0.5
+      propertyPath: _inputAction.m_SingletonActionBindings.Array.data[2].m_Id
+      value: 5bb9026d-7b08-44ea-ac64-cd439b863254
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349352947839653120, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
+      propertyPath: _inputAction.m_SingletonActionBindings.Array.data[3].m_Id
+      value: a80861c8-8923-41be-ae94-92a09860f9d8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349352947839653120, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
+      propertyPath: _inputAction.m_SingletonActionBindings.Array.data[4].m_Id
+      value: 9cb72183-b94f-4322-aac8-c1d1e4af0c91
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349352947839653120, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
+      propertyPath: _inputAction.m_SingletonActionBindings.Array.data[5].m_Id
+      value: 2184e316-f118-4779-87fa-37623f9635b4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349352947839653120, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
+      propertyPath: _inputAction.m_SingletonActionBindings.Array.data[0].m_Name
+      value: Joystick (Mouse)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349352947839653120, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
+      propertyPath: _inputAction.m_SingletonActionBindings.Array.data[1].m_Path
+      value: <Mouse>/leftButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349352947839653120, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
+      propertyPath: _inputAction.m_SingletonActionBindings.Array.data[2].m_Path
+      value: <Mouse>/position
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349352947839653120, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
+      propertyPath: _inputAction.m_SingletonActionBindings.Array.data[3].m_Name
+      value: Joystick (Touchscreen Simulator)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349352947839653120, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
+      propertyPath: _inputAction.m_SingletonActionBindings.Array.data[4].m_Path
+      value: <Touchscreen>/Press
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349352947839653120, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
+      propertyPath: _inputAction.m_SingletonActionBindings.Array.data[5].m_Path
+      value: <Touchscreen>/position
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b662ce3a28cf3849b257d7051a3b7b0, type: 3}
