@@ -21,12 +21,6 @@ namespace GameCore.PlayerShips.Movement
             GameSettings.controlType.subscribe += v => enabled = v == GameSettings.ControlType.FixedJoystick;
         }
 
-        RestrictedMovement _parentRestrictedMovement;
-
-        RestrictedMovement parentRestrictedMovement => _parentRestrictedMovement = _parentRestrictedMovement
-            ? _parentRestrictedMovement
-            : this.GetLinkedInParents<RestrictedMovement>();
-
         void OnEnable()
         {
             inputAction.Enable();
