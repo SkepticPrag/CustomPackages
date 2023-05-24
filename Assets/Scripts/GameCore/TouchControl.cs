@@ -1,6 +1,5 @@
 using UnityEngine.InputSystem;
 using System.Collections;
-using Store;
 using UnityEngine;
 
 namespace GameCore.PlayerShips.Movement
@@ -15,11 +14,7 @@ namespace GameCore.PlayerShips.Movement
         [SerializeField] float dragSpeed;
 
         [SerializeField] InputAction inputAction;
-
-        void Awake()
-        {
-            GameSettings.controlType.subscribe += v => enabled = v == GameSettings.ControlType.ScreenDrag;
-        }
+        
 
         bool isDragging;
 
@@ -30,7 +25,6 @@ namespace GameCore.PlayerShips.Movement
             inputAction.canceled += _ =>
             {
                 isDragging = false;
-                parentRestrictedMovement.desiredPosition = PlayerShip.instance.transform.position;
             };
         }
 
@@ -40,31 +34,25 @@ namespace GameCore.PlayerShips.Movement
             inputAction.Disable();
         }
 
-        RestrictedMovement _parentRestrictedMovement;
-        RestrictedMovement parentRestrictedMovement => _parentRestrictedMovement = _parentRestrictedMovement
-            ? _parentRestrictedMovement
-            : this.GetLinkedInParents<RestrictedMovement>();
-
         void InputPerformed(InputAction.CallbackContext context)
         {
             if (!context.action.WasPressedThisFrame()) return;
 
             isDragging = true;
-            parentRestrictedMovement.desiredPosition = PlayerShip.instance.transform.position;
             StartCoroutine(DragShip(context));
         }
 
         IEnumerator DragShip(InputAction.CallbackContext context)
         {
-            Vector2 initialPosition = GameCamera.instance.linkedCamera.ScreenToWorldPoint(context.ReadValue<Vector2>());
-            var currentPosition = parentRestrictedMovement.desiredPosition;
+            Vector2 initialPosition = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
+            Vector2 currentPosition = transform.position;
             while (isDragging)
             {
-                Vector2 newPosition = GameCamera.instance.linkedCamera.ScreenToWorldPoint(context.ReadValue<Vector2>());
+                Vector2 newPosition = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
                 Vector2 finalPosition = newPosition - initialPosition + currentPosition;
                 // PlayerShip.instance.transform.position = Vector2.SmoothDamp(PlayerShip.instance.transform.position,
                 //     finalPosition, ref velocity, dragSpeed);
-                parentRestrictedMovement.desiredPosition = Vector2.SmoothDamp(parentRestrictedMovement.desiredPosition, finalPosition, ref velocity, dragSpeed);
+                transform.position = Vector2.SmoothDamp(transform.position, finalPosition, ref velocity, dragSpeed);
                 // parentRestrictedMovement.desiredPosition = finalPosition;
                 yield return new WaitForFixedUpdate();
             }

@@ -1,8 +1,5 @@
 ﻿using System.Collections;
-using GameCore.PlayerShips.Movement.GamePads;
-using Store;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace GameCore.PlayerShips.Movement
@@ -24,23 +21,13 @@ namespace GameCore.PlayerShips.Movement
         Vector2 joystickHandleInitialPos, joystickPadInitialPos;
 
         bool isDragging;
-
-        void Awake()
-        {
-            GameSettings.controlType.subscribe += v => enabled = v == GameSettings.ControlType.FloatingJoystick;
-        }
-
-        RestrictedMovement _parentRestrictedMovement;
-
-        RestrictedMovement parentRestrictedMovement => _parentRestrictedMovement = _parentRestrictedMovement
-            ? _parentRestrictedMovement
-            : this.GetLinkedInParents<RestrictedMovement>();
+        
 
         void OnEnable()
         {
-            myCanvas = FloatingGamePadPresenter.instance.transform.root.GetComponent<Canvas>();
-            outerCircle = FloatingGamePadPresenter.instance.transform.GetComponent<RectTransform>();
-            innerCircle = FloatingGamePadPresenter.instance.transform.GetChild(0).GetComponent<RectTransform>();
+            // myCanvas = FloatingGamePadPresenter.instance.transform.root.GetComponent<Canvas>();
+            // outerCircle = FloatingGamePadPresenter.instance.transform.GetComponent<RectTransform>();
+            // innerCircle = FloatingGamePadPresenter.instance.transform.GetChild(0).GetComponent<RectTransform>();
 
             joystickPadInitialPos = outerCircle.position;
             joystickHandleInitialPos = innerCircle.position;
@@ -50,8 +37,6 @@ namespace GameCore.PlayerShips.Movement
             inputTouchAction.canceled += _ =>
             {
                 isDragging = false;
-                parentRestrictedMovement.desiredPosition = PlayerShip.instance.transform.position;
-                
                 outerCircle.position = joystickPadInitialPos;
                 innerCircle.position = joystickHandleInitialPos;
             };
@@ -84,23 +69,22 @@ namespace GameCore.PlayerShips.Movement
         {
             if (!context.action.WasPressedThisFrame()) return;
             isDragging = true;
-            parentRestrictedMovement.desiredPosition = PlayerShip.instance.transform.position;
             StartCoroutine(DragShip(context));
         }
 
         IEnumerator DragShip(InputAction.CallbackContext context)
         {
-            var currentShipPosition = parentRestrictedMovement.desiredPosition;
+            var currentShipPosition = transform.position;
 
             while (isDragging)
             {
                 var newShipPosition = context.ReadValue<Vector2>();
 
-                parentRestrictedMovement.desiredPosition = new Vector2(
+                transform.position = new Vector2(
                     currentShipPosition.x + newShipPosition.x * dragSpeed * Time.deltaTime,
                     currentShipPosition.y + newShipPosition.y * dragSpeed * Time.deltaTime);
 
-                currentShipPosition = parentRestrictedMovement.desiredPosition;
+                currentShipPosition = transform.position;
 
                 yield return new WaitForFixedUpdate();
             }
